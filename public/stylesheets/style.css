@@ -41,7 +41,8 @@ html {
 body {
   margin-top: 6em;
   padding: 30px;
-  font-family: 'Roboto';
+  font-family: 'Crimson Pro';
+  font-weight: 200;
   font-size: 1em;
   color: var(--accent-main);
   scrollbar-width: thin;
@@ -96,11 +97,6 @@ a {
   a:active:hover > * {
     box-shadow:var(--clear);
   }
-
-a.city-anchor {
-  position: relative;
-  top: -9em;
-}
 
 input {
   font: inherit;
@@ -258,17 +254,14 @@ span.label {
     overflow-y: hidden;
   }
   .logo {
-    font-weight: 800;
-    font-size: 38px;
+    font-weight: 900;
+    font-size: 44px;
     margin: 0em 1em;
+    background: var(--bg-alt);
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
     }
     .logo:hover {
       cursor: pointer;
-      text-shadow: var(--shadow-heavy), var(--shadow-light), var(--light-heavy);
-    }
-    .logo:active:hover {
-      text-shadow: var(--shadow-light);
     }
     .logo > .kstr {
       color: var(--crimson-ua);
@@ -278,8 +271,64 @@ span.label {
       background: var(--viridian-gradient);
       background-clip: text;
       -webkit-background-clip: text;
-      filter: saturate(200%);
+      filter: saturate(300%);
+      text-shadow:
+            0 0 4px var(--accent-alt),
+            0 0 11px var(--accent-alt),
+            0 0 19px var(--viridian-green),
+            0 0 40px var(--viridian-green),
+            0 0 80px var(--viridian-green),
+            0 0 90px var(--viridian-green),
+            0 0 100px var(--viridian-green),
+            0 0 150px var(--viridian-green);
       }
+      .logo > .gg:hover {
+        animation: flicker 1.5s infinite alternate;
+      }
+      @keyframes flicker {
+    
+        0%, 18%, 22%, 25%, 53%, 57%, 100% {
+          text-shadow:
+            0 0 4px var(--accent-alt),
+            0 0 11px var(--accent-alt),
+            0 0 19px var(--viridian-green),
+            0 0 40px var(--viridian-green),
+            0 0 80px var(--viridian-green),
+            0 0 90px var(--viridian-green),
+            0 0 100px var(--viridian-green),
+            0 0 150px var(--viridian-green);
+        }
+        
+        20%, 24%, 55% {        
+            text-shadow: none;
+        }    
+      }
+      @keyframes pulsate {
+        100% {
+          /* Larger blur radius */
+          text-shadow:
+            0 0 4px var(--accent-main),
+            0 0 11px var(--accent-main),
+            0 0 19px var(--accent-main),
+            0 0 40px var(--viridian-green),
+            0 0 80px var(--viridian-green),
+            0 0 90px var(--viridian-green),
+            0 0 100px var(--viridian-green),
+            0 0 150px var(--viridian-green);
+        }
+        0% {
+          /* A slightly smaller blur radius */
+          text-shadow:
+            0 0 4px var(--accent-main),
+            0 0 10px var(--accent-main),
+            0 0 18px var(--accent-main),
+            0 0 38px var(--viridian-green),
+            0 0 73px var(--viridian-green),
+            0 0 80px var(--viridian-green),
+            0 0 94px var(--viridian-green),
+            0 0 140px var(--viridian-green);
+        }
+      };
 
 .footer {
   bottom: 0;
@@ -585,137 +634,26 @@ span.label {
     background-color: var(--bg-alt);
   }
 
-.econ-sim-player-log {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  scrollbar-width: thin;
-  color: var(--accent-opaq-heavy);
-  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-  }
-  .econ-sim-player-log.active {
-    opacity: 1;
+  .work-in-progress {
+    opacity: 0;
     overflow-y: auto;
-    max-height: 12em;
-    padding: 1em;
-    background-color: var(--bg-alt);
-  }
-
-.market-billboard {
-  min-width: 12em;
-  }
-  .billboard-item {
-    padding: 0.25em 0;
-    }
-    .manual-input {
-      width: 6em;
-      }
-      .manual-input.short {
-        width: 4em;
-      }
-
-.agent-card {
-  min-width: 12em;
-  }
-  .agent-card:hover {
-    box-shadow: var(--clear);
-  }
-
-.city-list.gizmo {
-  top: 8em;
-  overflow-x: auto !important;
-}
-
-.city-wrapper {
-  padding: 1em;
-  width: 100%;
-  border-bottom: 4px dashed var(--crimson-ua);
-  border-radius: 2px;
-  box-sizing: border-box;
-}
-
-.city-anchors {
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: thin;
-  top: 5em;
-  left: 0;
-  right: 0;
-  position: fixed;
-  padding: 0em 1em;
-  background-color: var(--bg-alt);
-  }
-  .city-anchors.reverse-colors {
+    overflow-x: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 4em;
+    box-sizing: border-box;
+    scrollbar-width: thin;
     background-color: var(--bg-main);
-  }
-
-.stat-input {
-  width: 3em;
-  font-family: inherit;
-  }
-  .stat-input.w-18em {
-    width: 18em;
-  }
-  .stat-input.w-14em {
-    width: 14em;
-  }
-  .stat-input.w-10em {
-    width: 10em;
-  }
-  .stat-input.w-2em {
-    width: 2em;
-  }
-  .stat-input.changed {
-    border-color: var(--crimson-ua);
-  }
-
-.politic-gen-graph {
-  position: relative;
-  width: 30em;
-  height: 30em;
-  }
-  .politic-canvas {
-    position: absolute;
-    width: 30em;
-    border: solid 2px var(--accent-main);
-    color: var(--accent-opaq-light);
-    background-color: var(--bg-opaq-light);
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    box-shadow: var(--shadow-heavy), var(--shadow-light);
+    z-index: -1;
     }
-    .politic-canvas.front:hover {
-      opacity: 0.5;
-      filter: blur(2px);
-    }
-    .color-test-sqr {
-      padding: 0.5em;
-      margin: 0.5em;
-    }
-
-.combat-params-panel {
-  overflow: auto hidden;
-  scrollbar-width: thin;
-  max-height: 4em;
-  padding: 1em 0;
-  background-color: var(--bg-alt);
-  }
-  .combat-tweak-option {
-    margin: 0em 1em;
-  }
-
-.combat-char-card {
-  min-width: 12em;
-  }
-  .char-param {
-    padding: 0.1em;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-    }
-    .char-param:hover {
-      background-color: var(--accent-opaq-light);
-      box-shadow: var(--shadow-heavy), var(--shadow-light), var(--accent-opaq-light);
-    }
-    .char-param.active {
-      background-color: var(--accent-opaq-light);
+    .work-in-progress.active {
+      opacity: 1;
+      z-index: 3;
     }
 
 .flex {
