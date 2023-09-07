@@ -256,7 +256,7 @@ span.label {
   .logo {
     font-weight: 900;
     font-size: 44px;
-    margin: 0em 1em;
+    margin: 0em 0.5em;
     background: var(--bg-alt);
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
     }
@@ -264,9 +264,11 @@ span.label {
       cursor: pointer;
     }
     .logo > .kstr {
+      padding: 0;
       color: var(--crimson-ua);
       }
     .logo > .gg {
+      padding: 0;
       color: hsla(0, 0%, 0%, 0);
       background: var(--viridian-gradient);
       background-clip: text;
