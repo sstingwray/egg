@@ -14,61 +14,91 @@
     <link href="https://fonts.googleapis.com/css?family=Crimson Pro" rel="stylesheet"> 
   </head>
   <body>
-    <div class="work-in-progress active flex jc-center align-i-center">
+    <div class="work-in-progress flex jc-center align-i-center">
         Something is brewing here...
     </div>
     <div class="spinner-container flex jc-center align-i-center"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
-    <div class="flex row header bg-alt">
-      <button class="logo" tabindex="1"><span class="kstr">EINZBERN.</span><span class="gg">GG</span></button>
-    </div>
-    <button class="close-btn"><i class="fa fa-long-arrow-left"></i></button>
-    <div class="flex col no-wrap notification-panel"></div>
     <div class="flex align-i-center jc-center popup">
-      <div class="flex col align-i-center mrg-1em form confirm-form card">
-        <p class="confirmation-text"></p>
-        <div class="flex row">
-          <button class="cancel form-submit btn">Cancel</button>
-          <button class="confirm form-submit btn">Submit</button>
-        </div>
+      <div class="form">
+        <div class="popup-img-overlay"></div>
+        <img class="popup-img" src="" alt="">
+        <p class="popup-text"></p>
+        <button class="close-popup-btn"><i class="fa fa-times"></i></button>
       </div>
+      <div class="popup-underlay"></div>
     </div>
-    <div class="gizmo test-gizmo">
-      <h3 class="title">This is a test gizmo</h3>
-      <small>Made to test a few things</small><br>
-      <div class="body">
-        <div class="flex row align-i-center test-gizmo-btn-panel"></div>
-        <div class="flex row test-gizmo-knob-panel switch-panel"></div>
-        <div class="flex row wrap mrg-1em test-gizmo-content-container">
-        </div>
-      </div>
+    <div class="flex row header bg-alt flex col align-i-str">
+      <button class="logo" tabindex="1"><span class="kstr">EINZBERN.</span><span class="gg">GG</span></button>
+      <div class="separator select-marker"></div>
+      <a class="anchor active" href="#about">About</a>
+      <a class="anchor" href="#projects">Projects</a>
+      <a class="anchor sub" href="#demonschool">Demonschool</a>
+      <a class="anchor sub" href="#xenocrisis">Xenocrisis</a>
+      <a class="anchor sub" href="#idol">Idol Manager</a>
+      <a class="anchor sub" href="#x198">198X</a>
+      <a class="anchor sub" href="#misc">Miscellaneous</a>
+      <a class="anchor" href="#personal">Personal art</a>
+      <a class="anchor" href="#contacts">Contacts</a>
     </div>
     <div class="landing-page-content">
-      <div class="flex col align-i-left mrg-1em brd-rad-1em">
-        <h2>Hi! I'm Einzbern and this is my website!</h2>
-      </div>
-      <div class="flex row wrap gizmos-panel bg-alt mrg-1em brd-rad-1em">
-        <div class="flex col align-i-center jc-center mrg-1em">
-          <small>My projects:</small>
+      <div class="flex col mrg-1em brd-rad-1em">
+        <h1 id="about">About</h1>
+        <p>Hi! My name is Ekaterina Menabde.</p>
+        <p>I am an artist generalist currently based in Bratislava, Slovakia. My specialty is high-resolution pixel-art,
+          but I am always eager to pick up new skills. 
+        </p>
+        <h1 id="projects">Projects</h1>
+        <h2 id="demonschool">Demonschool</h2>
+        <h3>TBA 2023 / Necrosoft LLC / Steam, PS4, Xbox One, Switch</h3>
+        <p>Placeholder</p>
+        <div class="flex row wrap demonschool-container">
         </div>
-      </div>
-      <div class="flex row wrap jc-space-ar links-panel bg-alt mrg-1em brd-rad-1em">
-        <a class="btn" target="_blank" href="https://twitter.com/_einzbern">                  <img class="img-link" src="" alt="Twitter — twitter.com/_einzbern"></a>
-        <a class="btn" target="_blank" href="https://einsbern.tumblr.com/">                   <img class="img-link" src="" alt="Tumblr — einsbern.tumblr.com"></a>
-        <a class="btn" target="_blank" href="https://bsky.app/profile/einzbern.bsky.social/"> <img class="img-link" src="" alt="Bluesky — @einzbern.bsky.social"></a>
+        <h2 id="xenocrisis">Xeno Crisis</h2>
+        <h3>2019 / Bitmap Bureau / Sega Mega Drive, Dreamcast, PS Vita, N64 and others</h3>
+        <p>Worked on intro and ending cutscenes and interstitial illustrations, plus some minor concept and UI work.</p>
+        <div class="flex row wrap xenocrisis-container">
+        </div>
+        <h2 id="idol">Idol Manager</h2>
+        <h3>2021 / Glitch Pitch / Steam, PS5, PS4, Switch, Linux, Mac</h3>
+        <p>Worked on character sprites and environments.</p>
+        <div class="flex row wrap idol-container">
+        </div>
+        <h2 id="x198">198X</h2>
+        <h3>2019 / Hi-Bit Studios / Steam, PS4, Xbox One, Switch </h3>
+        <p>Worked on character design and cutscenes. </p>
+        <div class="flex row wrap x198-container">
+        </div>
+        <h2 id="misc">Miscellaneous</h2>
+        <div class="flex row wrap misc-container">
+        </div>
+        <h1 id="personal">Personal art</h1>
+        <div class="flex row wrap personal-container">
+        </div>
+        <h1 id="contacts">Contacts</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Integer volutpat, ante vel mollis euismod, tellus nibh facilisis velit, id cursus lacus neque ut mi.
+          Quisque eu diam tellus. Nulla eu ornare nulla. Aliquam porttitor imperdiet dui, non eleifend libero sollicitudin non.
+          Aenean dictum massa turpis, et porta velit facilisis consectetur. In a egestas quam, eu porttitor lorem. Vivamus lobortis rhoncus vehicula.
+          Donec rhoncus tortor orci, et pretium lacus dignissim et. Sed lobortis dui vitae mauris blandit, id laoreet turpis accumsan.
+          Donec cursus libero pretium nibh egestas, vitae rhoncus magna finibus. Ut sodales aliquet elit vel vehicula. Phasellus feugiat orci a placerat blandit.
+          Aenean vitae massa id felis tempor sagittis.</p>
       </div>
     </div>
     <div class="template">
       <button class="btn template"></button>
-      <div class="gizmo template">
-        <div class="title"><h3 class="title"></h3></div>
-        <div class="body"></div>
-      </div>
       <div class="flex row align-i-center mrg-01em switch-btn template"><p class="label"></p><div class="switch-container"><label class="switch"><input type="checkbox"><div class="slider"></div></label></div></div>
       <div class="separator template"></div>
       <div class="flex bg-alt mrg-1em notification template"><p class="mrg-1em notification-text"></p></div>
+      <div class="card image bg-alt mrg-1em template">
+        <div class="img-overlay">
+          <div class="img-text">
+            <p class="pdng-8px">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </div>
+        <img class="card-img" src="" alt="">
+      </div>
     </div>
-    <div class="flex row wrap jc-space-ar footer bg-main">
-  
+    <div class="flex row wrap jc-space-ar footer">
     </div>
   </body>
 </html>
