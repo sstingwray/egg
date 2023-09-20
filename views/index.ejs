@@ -11,7 +11,8 @@
     <script src="/javascripts/tinysort.min.js"></script>
     <script src="/javascripts/index.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Crimson Pro" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Crimson Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rubik One" rel="stylesheet"> 
   </head>
   <body>
     <div class="work-in-progress flex jc-center align-i-center">
@@ -19,17 +20,27 @@
     </div>
     <div class="spinner-container flex jc-center align-i-center"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
     <div class="flex align-i-center jc-center popup">
-      <div class="form">
+      <div class="img-form flex col align-i-center jc-center">
         <div class="popup-img-overlay"></div>
         <img class="popup-img" src="" alt="">
-        <p class="popup-text"></p>
+        <p class="light popup-img-text"></p>
         <button class="close-popup-btn"><i class="fa fa-times"></i></button>
       </div>
-      <div class="popup-underlay"></div>
+      <div class="popup-img-underlay"></div>
     </div>
     <div class="flex row header bg-alt flex col align-i-str">
       <button class="logo" tabindex="1"><span class="kstr">EINZBERN.</span><span class="gg">GG</span></button>
-      <div class="separator select-marker"></div>
+      <div class="anchor-marker-div">
+        <svg class="anchor-marker-svg" viewBox="0 0 10 10">
+          <defs>
+          <filter id="filter" height="2" width="2">
+            <feTurbulence baseFrequency="0.2" numOctaves="3" type="fractalNoise" />
+            <feDisplacementMap  scale="1"  xChannelSelector="R" in="SourceGraphic" />
+          </filter>
+          </defs>
+          <circle style="filter:url(#filter)" cx="5" cy="5" r="2"></circle>
+        </svg>
+      </div>
       <a class="anchor active" href="#about">About</a>
       <a class="anchor" href="#projects">Projects</a>
       <a class="anchor sub" href="#demonschool">Demonschool</a>
@@ -41,13 +52,19 @@
       <a class="anchor" href="#contacts">Contacts</a>
     </div>
     <div class="landing-page-content">
-      <div class="flex col mrg-1em brd-rad-1em">
-        <h1 id="about">About</h1>
+      <div class="flex col mrg-1em">
+        <div class="flex row align-i-center">
+          <h1 id="about">About</h1>
+          <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+        </div>
         <p>Hi! My name is Ekaterina Menabde.</p>
         <p>I am an artist generalist currently based in Bratislava, Slovakia. My specialty is high-resolution pixel-art,
           but I am always eager to pick up new skills. 
         </p>
-        <h1 id="projects">Projects</h1>
+        <div class="flex row align-i-center">
+          <h1 id="projects">Projects</h1>
+          <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+        </div>
         <h2 id="demonschool">Demonschool</h2>
         <h3>TBA 2023 / Necrosoft LLC / Steam, PS4, Xbox One, Switch</h3>
         <p>Placeholder</p>
@@ -68,13 +85,22 @@
         <p>Worked on character design and cutscenes. </p>
         <div class="flex row wrap x198-container">
         </div>
-        <h2 id="misc">Miscellaneous</h2>
+        <div class="flex row align-i-center">
+          <h2 id="misc">Miscellaneous</h2>
+          <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+        </div>
         <div class="flex row wrap misc-container">
         </div>
-        <h1 id="personal">Personal art</h1>
+        <div class="flex row align-i-center">
+          <h1 id="personal">Personal art</h1>
+          <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+        </div>
         <div class="flex row wrap personal-container">
         </div>
-        <h1 id="contacts">Contacts</h1>
+        <div class="flex row align-i-center">
+          <h1 id="contacts">Contacts</h1>
+          <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+        </div>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Integer volutpat, ante vel mollis euismod, tellus nibh facilisis velit, id cursus lacus neque ut mi.
           Quisque eu diam tellus. Nulla eu ornare nulla. Aliquam porttitor imperdiet dui, non eleifend libero sollicitudin non.
@@ -89,10 +115,10 @@
       <div class="flex row align-i-center mrg-01em switch-btn template"><p class="label"></p><div class="switch-container"><label class="switch"><input type="checkbox"><div class="slider"></div></label></div></div>
       <div class="separator template"></div>
       <div class="flex bg-alt mrg-1em notification template"><p class="mrg-1em notification-text"></p></div>
-      <div class="card image bg-alt mrg-1em template">
+      <div class="card image mrg-1em template">
         <div class="img-overlay">
           <div class="img-text">
-            <p class="pdng-8px">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p class="light pdng-8px"></p>
           </div>
         </div>
         <img class="card-img" src="" alt="">

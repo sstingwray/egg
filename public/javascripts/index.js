@@ -148,12 +148,10 @@
     app.fabricateImageCard = (container, img, text) => {
         let newImageCard = app.components.imageCardTemplate.cloneNode(true);
 
-        console.log(container);
-
         newImageCard.classList.add('generated');
         newImageCard.classList.remove ('template');
         newImageCard.style.transform = `rotate(${Math.random()*2-1}deg)`;
-        newImageCard.querySelector('.img-overlay > .img-text > p').innerHTML = text;
+        (text !== '' ? newImageCard.querySelector('.img-overlay > .img-text > p').innerHTML = text : newImageCard.querySelector('.img-overlay').classList.add('no-text'));
         newImageCard.querySelector('.card-img').src = `images/${img}`;
 
         container.appendChild(newImageCard);
@@ -169,8 +167,8 @@
     };
     
     app.showPopup = (text, img) => {
-        let form = document.querySelector('.form');
-        let paragraph = form.querySelector('.popup-text');
+        let form = document.querySelector('.img-form');
+        let paragraph = form.querySelector('.popup-img-text');
         let image = form.querySelector('.popup-img');
 
         $('.popup').addClass('active');
@@ -243,7 +241,7 @@
 
         {
             document.querySelector('.logo').style.transform = `rotate(${Math.random()*4-2}deg)`;
-            document.querySelectorAll('.anchor').forEach( link => link.style.transform = `rotate(${Math.random()*4-2}deg)`);
+            document.querySelectorAll('.anchor').forEach(link => link.style.transform = `rotate(${Math.random()*4-2}deg)`);
         }
 
         {
@@ -255,24 +253,27 @@
             let lastKnownScrollPosition = 0;
             let lastActiveScrollItem = scrollItems[0];
             let lastActiveMenuItem = menuItems[0];
+            let previousActiveMenuItem = lastActiveMenuItem;
             let ticking = false;
 
-            let selectMarker = document.querySelector('.select-marker');
+            let anchorMarker = document.querySelector('.anchor-marker-div');
 
-            selectMarker.style.top = `${lastActiveMenuItem.offsetTop + lastActiveMenuItem.offsetHeight}px`;
+            anchorMarker.style.top = `${lastActiveMenuItem.offsetTop + lastActiveMenuItem.offsetHeight}px`;
             
             document.addEventListener("scroll", (event) => {
-                lastKnownScrollPosition = window.pageYOffset;
+                lastKnownScrollPosition = window.scrollY;
 
                 if (!ticking) {
                     window.requestAnimationFrame(() => {
-                        lastActiveScrollItem = scrollItems.find(item => item.offsetTop + 30 > lastKnownScrollPosition);
-                        menuItems.forEach(item => item.classList.remove('active'));
-                        lastActiveMenuItem = menuItems.filter(item => item.attributes.href.value == `#${lastActiveScrollItem.attributes.id.value}`)[0];
-                        lastActiveMenuItem.classList.add('active');
-
-                        selectMarker.style.top = `${lastActiveMenuItem.offsetTop + lastActiveMenuItem.offsetHeight}px`;
-
+                        lastActiveScrollItem = scrollItems.findLast(item => item.offsetTop - item.offsetHeight*2 < lastKnownScrollPosition);
+                        if (lastActiveScrollItem) {
+                            lastActiveMenuItem = menuItems.filter(item => item.attributes.href.value == `#${lastActiveScrollItem.attributes.id.value}`)[0];
+                            if (previousActiveMenuItem !== lastActiveMenuItem) {
+                                previousActiveMenuItem = lastActiveMenuItem;
+                                lastActiveMenuItem.style.transform = `rotate(${Math.random()*4-2}deg)`;
+                            };
+                            anchorMarker.style.top = `${lastActiveMenuItem.offsetTop + lastActiveMenuItem.offsetHeight}px`;
+                        }
                         ticking = false;
                     });
 
@@ -295,12 +296,16 @@
         
 
         $('.card.image').on('click', (event) => {
-            console.log(event.currentTarget.children[1].src);
             app.showPopup(event.currentTarget.children[0].children[0].children[0].innerHTML, event.currentTarget.children[1].src);
         });
 
         $('.logo').on('click', () => {
             window.location.href="/";
+        });
+
+        $('.anchor').on('click', () => {
+            document.querySelector('.logo').style.transform = `rotate(${Math.random()*2-1}deg)`;
+            document.querySelector('.anchor-marker-div').style.transform = `rotate(${Math.random()*720-360}deg)`;
         });
 
         $('.cancel.form-submit.btn').on('click', () => {
@@ -311,7 +316,7 @@
             $('.popup').removeClass('active');
             $('.landing-page-content').removeClass('blurred');
         });
-        $('.popup-underlay').on('click', (event) => {
+        $('.popup-img-underlay').on('click', (event) => {
             event.stopPropagation();
             $('.popup').removeClass('active');
             $('.landing-page-content').removeClass('blurred');

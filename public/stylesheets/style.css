@@ -1,10 +1,12 @@
 :root {
   --crimson-ua: hsla(0, 49%, 39%, 1);
+  --mandy: hsla(349, 76%, 61%, 1);
+
   --viridian-green: hsla(180, 49%, 39%, 1); 
   --viridian-gradient: linear-gradient(180deg, var(--bg-main) 20%, var(--viridian-green) 70%, var(--accent-main));
 
   --accent-main: hsla(180, 12%, 95%, 1);
-  --accent-alt: hsla(180, 5%, 85%, 1);
+  --accent-alt: hsla(0, 5%, 85%, 1);
   --accent-opaq-light: hsla(180, 12%, 95%, 0.3);
   --accent-opaq-heavy:hsla(180, 12%, 95%, 0.7);
 
@@ -33,7 +35,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--crimson-ua);
+  background: var(--viridian-green);
 }
 
 ::-webkit-scrollbar-corner {
@@ -42,7 +44,7 @@ html {
 
 html {
   scrollbar-width: thin;
-  scrollbar-color: var(--crimson-ua) var(--bg-main);
+  scrollbar-color: var(--viridian-green) var(--bg-alt);
 }
 
 body {
@@ -50,8 +52,8 @@ body {
   font-family: 'Crimson Pro';
   font-weight: 200;
   font-size: 1em;
-  color: var(--accent-main);
-  background-color: var(--bg-main);
+  color: var(--bg-main);
+  background-color: var(--accent-alt);
   }
   body.reverse-colors {
     background-color: var(--bg-alt);
@@ -68,24 +70,29 @@ i {
 }
 
 h1 {
-  font-size: 2em;
+  font-family: "Rubik One";
+  font-size: 1.6em;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
 h2 {
-  font-size: 1.5em;
+  font-size: 1.4em;
   white-space: nowrap;
 }
 
 h3 {
   font-size: 1.2em;
   margin: 0em 1em 1em 0em;
-  font-weight: 200;
   white-space: nowrap;
 }
 
 p, label {
   margin: 0.2em 0em;
+}
+
+p.light {
+  color: var(--accent-main);
 }
 
 span:not(:empty) {
@@ -264,32 +271,46 @@ span.label {
     z-index: 3;
     overflow-x: auto;
     overflow-y: hidden;
+    box-shadow: var(--shadow-light), var(--shadow-heavy), var(--shadow-heavy);
   }
   a.anchor {
-    font-size: 2em;
+    font-family: "Rubik One";
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 1.6em;
     padding: 0.3em 1em;
+    margin-left: 1em;
     }
     a.anchor:hover {
-      transform: scale(1.05) rotate(0) !important;
       text-shadow: var(--light-heavy);
     }
     a.anchor.sub {
-      font-size: 1.5em;
-      margin-left: 2em;
+      text-transform: none !important;
+      font-family: "Crimson Pro";
+      font-size: 1.4em;
+      margin-left: 2.5em;
     }
-    .separator.select-marker {
+    .anchor-marker-div {
       position: absolute;
-      width: inherit;
-      margin: 0;
+      margin-top: -3em;
       top: 0;
+      height: 3em;
+      width: 3em;
       z-index: -1;
       transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-    }
+      }
+      .anchor-marker-svg {
+        width: 100%;
+        height: inherit;
+        stroke: var(--mandy);
+        fill: none;
+      }
   .logo {
     font-weight: 900;
     font-size: 44px;
     margin: 0.5em;
     background: var(--bg-alt);
+    text-shadow: var(--shadow-light), var(--shadow-heavy), var(--shadow-heavy);
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
     }
     .logo:hover {
@@ -299,7 +320,7 @@ span.label {
     }
     .logo > .kstr {
       padding: 0;
-      color: var(--crimson-ua);
+      color: var(--mandy);
       }
     .logo > .gg {
       padding: 0;
@@ -354,27 +375,24 @@ span.label {
             0 0 140px var(--viridian-green);
         }
       }
-
 .landing-page-content {
   margin-left: var(--header-width);
   box-sizing: border-box;
   scrollbar-width: thin;
-  scrollbar-color: var(--crimson-ua) var(--bg-main);
+  scrollbar-color: var(--mandy) var(--bg-main);
   transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
   }
   .landing-page-content.blurred {
-    opacity: 0.5;
+    opacity: 0.25;
     filter: blur(8px);
   }
-
   .card {
     position: relative;
-    padding: 1em;
     border-radius: 2px;
     height: 22em;
     width: fit-content;
-    background-color: var(--bg-alt);
-    box-shadow: var(--shadow-light), var(--shadow-light);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    pointer-events: none;
     }
     .card.placeholder {
       min-height: 20em;
@@ -382,6 +400,10 @@ span.label {
     }
     .card.small {
       height: 11em;
+    }
+    .card:hover {
+      box-shadow: var(--shadow-light), var(--shadow-heavy), var(--shadow-heavy);
+      transform: scale(1.05) !important;
     }
     .img-overlay {
       opacity: 0;
@@ -395,18 +417,25 @@ span.label {
       background: var(--bg-opaq-light);
       z-index: 3;
       transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+      pointer-events: auto;
       }
       .img-overlay:hover {
         opacity: 1;
-      }
-      .img-text {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        height: 20%;
-        width: 100%;
-        background: var(--bg-main);
-      }
+        }
+        .img-overlay.no-text:hover {
+          opacity: 0;
+          }
+        .img-text {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          height: 20%;
+          width: 100%;
+          background: var(--bg-main);
+          }
+          .img-overlay.no-text > .img-text {
+            opacity: 0;
+          }
     .card-img {
       object-fit: cover;
       max-width: 100%;
@@ -415,7 +444,41 @@ span.label {
     .upscaled {
       height: 100%;
     }
-
+  .img-form {
+    position: relative;
+    padding: 1em;
+    max-height: 90%;
+    z-index: 6;
+    }
+    .popup-img-text {
+      font-size: 1.2em;
+      z-index: 8;
+    }
+    .popup-img {
+      max-width: 60vw;
+      max-height: 90vh;
+      box-shadow: var(--shadow-light), var(--shadow-light);
+      }
+      .popup-img-overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        z-index: 7;
+      }
+    .popup-img-underlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 100%;
+      z-index: 5;
+      background-color: var(--bg-main);
+      opacity: 0.5;
+    }
 .footer {
   bottom: 0;
   left: 0;
@@ -517,7 +580,7 @@ span.label {
       transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
     }
     input:checked + .slider {
-      background-color: var(--crimson-ua);
+      background-color: var(--mandy);
     }
 
     input:focus + .slider {
@@ -549,7 +612,7 @@ span.label {
       border: 0.2em solid var(--viridian-green);
     }
     .notification.negative {
-      border: 0.2em solid var(--crimson-ua);
+      border: 0.2em solid var(--mandy);
     }
     .notification:hover {
       box-shadow: var(--shadow-light);
@@ -557,7 +620,6 @@ span.label {
     .notification.fading {
       opacity: 0;
     }
-
 .popup {
   opacity: 0;
   position: fixed;
@@ -592,37 +654,6 @@ span.label {
     z-index: 8;
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
   }
-  .form {
-    position: relative;
-    padding: 1em;
-    max-height: 90%;
-    z-index: 6;
-    }
-    .popup-text {
-      z-index: 8;
-    }
-    .popup-img {
-      max-width: 60vw;
-      max-height: 90vh;
-      }
-      .popup-img-overlay {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        height: 100%;
-        z-index: 7;
-      }
-    .popup-underlay {
-      position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        height: 100%;
-        z-index: 5;
-    }
   .close-popup-btn:hover {
     background-color: var(--accent-opaq-light);
     box-shadow: var(--shadow-heavy), var(--shadow-light), var(--light-heavy);
@@ -649,9 +680,21 @@ span.label {
   }
 
 .separator {
-  border: solid var(--crimson-ua);
-  margin: 1em 0;
+  width: inherit;
+  stroke: var(--mandy);
+  stroke-width: 4px;
+  fill: none;
 }
+
+.line-div {
+  height: 8px;
+  }
+  .line-svg {
+    width: 100%;
+    height: inherit;
+    stroke: var(--mandy);
+    fill: none;
+  }
 
 .switch-panel {
   opacity: 0;
@@ -796,6 +839,14 @@ span.label {
   min-width: 20em;
 }
 
+.h-1em {
+  height: 1em;
+}
+
+.h-2em {
+  height: 2em;
+}
+
 .h-20em {
   height: 20em;
 }
@@ -813,7 +864,7 @@ span.label {
 }
 
 .color-red {
-  color: var(--crimson-ua);
+  color: var(--mandy);
 }
 
 .color-green {
