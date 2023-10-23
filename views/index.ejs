@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Einzbern.gg</title>
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/icons/favicon.ico" type="image/x-icon">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="/stylesheets/fontawesome.css">
     <link rel="stylesheet" href="/stylesheets/brands.css">
@@ -25,89 +25,80 @@
         <img class="popup-img" src="" alt="">
         <p class="light popup-img-text"></p>
         <button class="close-popup-btn"><i class="fa fa-times"></i></button>
+        <button class="popup-scroll-btn left"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="popup-scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
       <div class="popup-img-underlay"></div>
     </div>
     <div class="flex row header bg-alt flex col align-i-str">
       <button class="logo" tabindex="1"><span class="kstr">EINZBERN.</span><span class="gg">GG</span></button>
-      <div class="anchor-marker-div">
-        <svg class="anchor-marker-svg" viewBox="0 0 10 10">
-          <defs>
-          <filter id="filter" height="2" width="2">
-            <feTurbulence baseFrequency="0.2" numOctaves="3" type="fractalNoise" />
-            <feDisplacementMap  scale="1"  xChannelSelector="R" in="SourceGraphic" />
-          </filter>
-          </defs>
-          <circle style="filter:url(#filter)" cx="5" cy="5" r="2"></circle>
-        </svg>
+      <div class="flex col header-block">
+        <h1 class="color-accent-opaq-heavy">About</h1>
+        <p class="color-accent-opaq-heavy ">Hi! My name is Ekaterina Menabde.<br><br>
+          I am an artist generalist with a focus on pixel art based in Slovakia.<br><br>
+          My specialty is high-resolution pixel illustrations and character portraits, but I am always eager to pick up a new skill and so I have worked all sorts of jobs over the years. 
+        </p>
       </div>
-      <a class="anchor active" href="#about">About</a>
-      <a class="anchor" href="#projects">Projects</a>
-      <a class="anchor sub" href="#demonschool">Demonschool</a>
-      <a class="anchor sub" href="#xenocrisis">Xenocrisis</a>
-      <a class="anchor sub" href="#idol">Idol Manager</a>
-      <a class="anchor sub" href="#x198">198X</a>
-      <a class="anchor sub" href="#misc">Miscellaneous</a>
-      <a class="anchor" href="#personal">Personal art</a>
-      <a class="anchor" href="#contacts">Contacts</a>
+      
+      <div class="flex col header-block">
+        <h1 class="color-accent-opaq-heavy">Contacts</h1>
+        <a class="contact-link" href="" target="_blank"><div class="flex row align-i-s-end"><img class="icon" src="/images/icons/icon_mail.png" alt="">einzbern.mail@gmail.com</div></a>
+        <a class="contact-link" href="" target="_blank"><div class="flex row align-i-s-end"><img class="icon" src="/images/icons/icon_twitter.png" alt="">@_einzbern</div></a>
+      </div>
     </div>
     <div class="landing-page-content">
-      <div class="flex col mrg-1em">
-        <div class="flex row align-i-center">
-          <h1 id="about">About</h1>
-          <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+      <div class="flex col mrg-4em">
+        <div id="demonschool">
+          <div class="flex row align-i-center">
+            <h1>Demonschool</h1>
+            <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+          </div>
+          <h3>TBA 2023 / Necrosoft LLC / Steam, PS4, Xbox One, Switch</h3>
+          <p>I was responsible for creating the visual identity of the game from it’s inception as concept artist and UI designer.<br>
+            Later in the project I was making character portraits, sprites and animations, UI assets and animations and 3D environments.</p>
+          <div class="flex row wrap mrg-custom demonschool-container"></div>
         </div>
-        <p>Hi! My name is Ekaterina Menabde.</p>
-        <p>I am an artist generalist currently based in Bratislava, Slovakia. My specialty is high-resolution pixel-art,
-          but I am always eager to pick up new skills. 
-        </p>
-        <div class="flex row align-i-center">
-          <h1 id="projects">Projects</h1>
-          <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+        <div id="xenocrisis">
+          <div class="flex row align-i-center">
+            <h1>Xeno Crisis</h1>
+            <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+          </div>
+          <h3>2019 / Bitmap Bureau / Sega Mega Drive, Dreamcast, PS Vita, N64 and others</h3>
+          <p>Intro and ending cinematics, interstitial illustrations, minor concept and UI work.</p>
+          <div class="flex row wrap mrg-custom xenocrisis-container"></div>
         </div>
-        <h2 id="demonschool">Demonschool</h2>
-        <h3>TBA 2023 / Necrosoft LLC / Steam, PS4, Xbox One, Switch</h3>
-        <p>Placeholder</p>
-        <div class="flex row wrap demonschool-container">
+        <div id="x198">
+          <div class="flex row align-i-center">
+            <h1>198X</h1>
+            <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+          </div>
+          <h3>2019 / Hi-Bit Studios / Steam, PS4, Xbox One, Switch </h3>
+          <p>Character design, cutscene character art, promotional pixel illustation.</p>
+          <div class="flex row wrap mrg-custom x198-container"></div>
         </div>
-        <h2 id="xenocrisis">Xeno Crisis</h2>
-        <h3>2019 / Bitmap Bureau / Sega Mega Drive, Dreamcast, PS Vita, N64 and others</h3>
-        <p>Worked on intro and ending cutscenes and interstitial illustrations, plus some minor concept and UI work.</p>
-        <div class="flex row wrap xenocrisis-container">
+        <div id="idol">
+          <div class="flex row align-i-center">
+            <h1>Idol Manager</h1>
+            <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+          </div>
+          <h3>2021 / Glitch Pitch / Steam, PS5, PS4, Switch, Linux, Mac</h3>
+          <p>Character sprites, environmens.</p>
+          <div class="flex row wrap mrg-custom idol-container"></div>
         </div>
-        <h2 id="idol">Idol Manager</h2>
-        <h3>2021 / Glitch Pitch / Steam, PS5, PS4, Switch, Linux, Mac</h3>
-        <p>Worked on character sprites and environments.</p>
-        <div class="flex row wrap idol-container">
+        <div id="misc">
+          <div class="flex row align-i-center">
+            <h1>Miscellaneous</h1>
+            <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+          </div>
+          <div class="flex row wrap mrg-custom misc-container"></div>
         </div>
-        <h2 id="x198">198X</h2>
-        <h3>2019 / Hi-Bit Studios / Steam, PS4, Xbox One, Switch </h3>
-        <p>Worked on character design and cutscenes. </p>
-        <div class="flex row wrap x198-container">
+        <div id="personal">
+          <div class="flex row align-i-center">
+            <h1>Personal art</h1>
+            <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+          </div>
+          <div class="flex row wrap mrg-custom personal-container"></div>
         </div>
-        <div class="flex row align-i-center">
-          <h2 id="misc">Miscellaneous</h2>
-          <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
-        </div>
-        <div class="flex row wrap misc-container">
-        </div>
-        <div class="flex row align-i-center">
-          <h1 id="personal">Personal art</h1>
-          <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
-        </div>
-        <div class="flex row wrap personal-container">
-        </div>
-        <div class="flex row align-i-center">
-          <h1 id="contacts">Contacts</h1>
-          <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
-        </div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Integer volutpat, ante vel mollis euismod, tellus nibh facilisis velit, id cursus lacus neque ut mi.
-          Quisque eu diam tellus. Nulla eu ornare nulla. Aliquam porttitor imperdiet dui, non eleifend libero sollicitudin non.
-          Aenean dictum massa turpis, et porta velit facilisis consectetur. In a egestas quam, eu porttitor lorem. Vivamus lobortis rhoncus vehicula.
-          Donec rhoncus tortor orci, et pretium lacus dignissim et. Sed lobortis dui vitae mauris blandit, id laoreet turpis accumsan.
-          Donec cursus libero pretium nibh egestas, vitae rhoncus magna finibus. Ut sodales aliquet elit vel vehicula. Phasellus feugiat orci a placerat blandit.
-          Aenean vitae massa id felis tempor sagittis.</p>
       </div>
     </div>
     <div class="template">

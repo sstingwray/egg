@@ -21,7 +21,7 @@
   --light-light: 0 3px 30px -10px hsla(180, 12%, 85%, 0.3);
   --light-heavy: 0 3px 30px hsla(180, 12%, 85%, 0.3);
 
-  --header-width: 20em;
+  --header-width: max(20em, 20vw);
 }
 
 html {
@@ -49,6 +49,7 @@ html {
 
 body {
   padding: 30px;
+  margin: 0;
   font-family: 'Crimson Pro';
   font-weight: 200;
   font-size: 1em;
@@ -83,12 +84,14 @@ h2 {
 
 h3 {
   font-size: 1.2em;
-  margin: 0em 1em 1em 0em;
+  margin: 0em 0.4em 0.4em 0em;
   white-space: nowrap;
 }
 
 p, label {
   margin: 0.2em 0em;
+  font-size: 1.2em;
+  line-height: 1.4em;
 }
 
 p.light {
@@ -273,38 +276,10 @@ span.label {
     overflow-y: hidden;
     box-shadow: var(--shadow-light), var(--shadow-heavy), var(--shadow-heavy);
   }
-  a.anchor {
-    font-family: "Rubik One";
-    text-transform: uppercase;
-    font-weight: 900;
-    font-size: 1.6em;
-    padding: 0.3em 1em;
-    margin-left: 1em;
-    }
-    a.anchor:hover {
-      text-shadow: var(--light-heavy);
-    }
-    a.anchor.sub {
-      text-transform: none !important;
-      font-family: "Crimson Pro";
-      font-size: 1.4em;
-      margin-left: 2.5em;
-    }
-    .anchor-marker-div {
-      position: absolute;
-      margin-top: -3em;
-      top: 0;
-      height: 3em;
-      width: 3em;
-      z-index: -1;
-      transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-      }
-      .anchor-marker-svg {
-        width: 100%;
-        height: inherit;
-        stroke: var(--mandy);
-        fill: none;
-      }
+  .header-block > * {
+    padding: 0 16px !important;
+    margin: 0.6em 0 !important;
+  }
   .logo {
     font-weight: 900;
     font-size: 44px;
@@ -389,7 +364,7 @@ span.label {
   .card {
     position: relative;
     border-radius: 2px;
-    height: 22em;
+    height: 11em;
     width: fit-content;
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
     pointer-events: none;
@@ -440,6 +415,7 @@ span.label {
       object-fit: cover;
       max-width: 100%;
       height: 100%;
+      border-radius: 2px;
     }
     .upscaled {
       height: 100%;
@@ -451,6 +427,7 @@ span.label {
     z-index: 6;
     }
     .popup-img-text {
+      text-align: center;
       font-size: 1.2em;
       z-index: 8;
     }
@@ -479,6 +456,9 @@ span.label {
       background-color: var(--bg-main);
       opacity: 0.5;
     }
+  .contact-link {
+    font-size: 1.2em;
+  }
 .footer {
   bottom: 0;
   left: 0;
@@ -656,11 +636,39 @@ span.label {
   }
   .close-popup-btn:hover {
     background-color: var(--accent-opaq-light);
-    box-shadow: var(--shadow-heavy), var(--shadow-light), var(--light-heavy);
+    text-shadow: var(--shadow-heavy), var(--shadow-light), var(--light-heavy);
   }
   .close-popup-btn:active:hover {
-    box-shadow: var(--shadow-light);
+    text-shadow: var(--shadow-light);
   }
+  .popup-scroll-btn {
+    position: absolute;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: 200;
+    padding: 1.5em;
+    width: 4em;
+    height: 4em;
+    border-radius: 10%;
+    z-index: 8;
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    }
+    .popup-scroll-btn:hover {
+      background-color: var(--accent-opaq-light);
+      text-shadow: var(--shadow-heavy), var(--shadow-light), var(--light-heavy);
+    }
+    .popup-scroll-btn:active:hover {
+      text-shadow: var(--shadow-light);
+    }
+    .popup-scroll-btn.right {
+      right: -4em;
+    }
+    .popup-scroll-btn.left {
+      left: -4em;
+    }
 
 .img-link {
   opacity: 0.7;
@@ -679,6 +687,11 @@ span.label {
     box-shadow: var(--shadow-light);
   }
 
+.icon {
+  height: 0.8em;
+  margin: 0 0.2em;
+}
+
 .separator {
   width: inherit;
   stroke: var(--mandy);
@@ -694,6 +707,7 @@ span.label {
     height: inherit;
     stroke: var(--mandy);
     fill: none;
+    opacity: 0.4;
   }
 
 .switch-panel {
@@ -772,6 +786,9 @@ span.label {
   .flex.align-i-str {
     align-items: stretch;
   }
+  .flex.align-i-s-end {
+    align-items: self-end;
+  }
   .flex.align-c-center {
     align-content: flex-start;
   }
@@ -785,11 +802,20 @@ span.label {
 .mrg-01em {
   margin: 0 1em;
 }
+.mrg-1em0 {
+  margin: 1em 0;
+}
 .mrg-01em00 {
   margin: 0 1em 0 0;
 }
 .mrg-2em {
   margin: 2em;
+}
+.mrg-4em {
+  margin: 4em;
+}
+.mrg-custom {
+  margin: 1em 10vw 1em 0em;
 }
 
 .pdng-1em {
@@ -869,6 +895,10 @@ span.label {
 
 .color-green {
   color: var(--viridian-green);
+}
+
+.color-accent-opaq-heavy {
+  color: var(--accent-opaq-heavy);
 }
 
 .bg-main {

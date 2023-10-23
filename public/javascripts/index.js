@@ -31,13 +31,12 @@
                     { file:'idol-manager/3.png', text: '' },
                     { file:'idol-manager/4.png', text: '' },
                     { file:'idol-manager/5.gif', text: '' },
-                    { file:'idol-manager/6.png', text: '' },
                 ],
                 x198: [
                     { file:'x198/1.gif', text: '' },
                     { file:'x198/2.gif', text: '' },
-                    { file:'x198/3.gif', text: '' },
-                    { file:'x198/4.gif', text: '' },
+                    { file:'x198/3.gif', text: 'Characters by me, background by another artist.' },
+                    { file:'x198/4.gif', text: 'Characters by me, background by another artist.' },
                     { file:'x198/5.png', text: '' },
                     { file:'x198/6.png', text: '' },
                     { file:'x198/7.png', text: '' },
@@ -47,12 +46,6 @@
                     { file:'misc/1.png', text: '' },
                     { file:'misc/2.png', text: '' },
                     { file:'misc/3.png', text: '' },
-                    { file:'misc/4.png', text: '' },
-                    { file:'misc/5.png', text: '' },
-                    { file:'misc/6.png', text: '' },
-                    { file:'misc/7.png', text: '' },
-                    { file:'misc/8.png', text: '' },
-                    { file:'misc/9.png', text: '' },
                 ],
                 personal: [
                     { file:'personal/1.gif', text: '' },
@@ -73,18 +66,6 @@
                     { file:'personal/16.jpg', text: '' },
                     { file:'personal/17.png ', text: '' },
                     { file:'personal/18.gif', text: '' },
-                    { file:'personal/19.png', text: '' },
-                    { file:'personal/20.png', text: '' },
-                    { file:'personal/21.png', text: '' },
-                    { file:'personal/22.png', text: '' },
-                    { file:'personal/23.jpeg', text: '' },
-                    { file:'personal/24.jpg', text: '' },
-                    { file:'personal/25.jpeg', text: '' },
-                    { file:'personal/26.jpg', text: '' },
-                    { file:'personal/27.jpeg', text: '' },
-                    { file:'personal/28.jpeg', text: '' },
-                    { file:'personal/29.jpeg', text: '' },
-                    { file:'personal/30.jpg', text: '' },
                 ]
             }
         },
@@ -145,14 +126,16 @@
         container.appendChild(newSwitch);
     };
 
-    app.fabricateImageCard = (container, img, text) => {
+    app.fabricateImageCard = (container, img, text, id) => {
         let newImageCard = app.components.imageCardTemplate.cloneNode(true);
 
         newImageCard.classList.add('generated');
         newImageCard.classList.remove ('template');
+        newImageCard.id = id;
         newImageCard.style.transform = `rotate(${Math.random()*2-1}deg)`;
-        (text !== '' ? newImageCard.querySelector('.img-overlay > .img-text > p').innerHTML = text : newImageCard.querySelector('.img-overlay').classList.add('no-text'));
-        newImageCard.querySelector('.card-img').src = `images/${img}`;
+        newImageCard.querySelector('.img-overlay > .img-text > p').innerHTML = text;
+        newImageCard.querySelector('.img-overlay').classList.add('no-text');
+        newImageCard.querySelector('.card-img').src = `images/full/${img}`;
 
         container.appendChild(newImageCard);
     }
@@ -224,6 +207,9 @@
     };
 
     $(function() {
+        let popupOpen = false;
+        let lastClickedImgCard = '';
+
         app.containers.header = document.querySelector('.header');
         app.containers.notificationPanel = document.querySelector('.notification-panel');
         app.containers.demonschoolContainer = document.querySelector('.demonschool-container');
@@ -240,52 +226,9 @@
         app.components.imageCardTemplate = document.querySelector('.card.image.template');
 
         {
-            document.querySelector('.logo').style.transform = `rotate(${Math.random()*4-2}deg)`;
-            document.querySelectorAll('.anchor').forEach(link => link.style.transform = `rotate(${Math.random()*4-2}deg)`);
-        }
-
-        {
-            let menuItems = Array.prototype.map.call(app.containers.header.querySelectorAll("a"), item => {return item});
-
-
-            let scrollItems = menuItems.map(item => document.querySelector(item.attributes.href.value));
-
-            let lastKnownScrollPosition = 0;
-            let lastActiveScrollItem = scrollItems[0];
-            let lastActiveMenuItem = menuItems[0];
-            let previousActiveMenuItem = lastActiveMenuItem;
-            let ticking = false;
-
-            let anchorMarker = document.querySelector('.anchor-marker-div');
-
-            anchorMarker.style.top = `${lastActiveMenuItem.offsetTop + lastActiveMenuItem.offsetHeight}px`;
-            
-            document.addEventListener("scroll", (event) => {
-                lastKnownScrollPosition = window.scrollY;
-
-                if (!ticking) {
-                    window.requestAnimationFrame(() => {
-                        lastActiveScrollItem = scrollItems.findLast(item => item.offsetTop - item.offsetHeight*2 < lastKnownScrollPosition);
-                        if (lastActiveScrollItem) {
-                            lastActiveMenuItem = menuItems.filter(item => item.attributes.href.value == `#${lastActiveScrollItem.attributes.id.value}`)[0];
-                            if (previousActiveMenuItem !== lastActiveMenuItem) {
-                                previousActiveMenuItem = lastActiveMenuItem;
-                                lastActiveMenuItem.style.transform = `rotate(${Math.random()*4-2}deg)`;
-                            };
-                            anchorMarker.style.top = `${lastActiveMenuItem.offsetTop + lastActiveMenuItem.offsetHeight}px`;
-                        }
-                        ticking = false;
-                    });
-
-                    ticking = true;
-                }
-            });
-        }
-
-        {
             Object.keys(app.data.images).forEach(key => {
-                app.data.images[key].forEach(image => {
-                    app.fabricateImageCard(document.querySelector(`.${key}-container`), image.file, image.text);
+                app.data.images[key].forEach((image, index)  => {
+                    app.fabricateImageCard(document.querySelector(`.${key}-container`), image.file, image.text, `${key}-${index}`);
                 });
             });
         }
@@ -293,35 +236,53 @@
         setTimeout(() => {
             $(app.components.spinner).hide();
         }, 1000);
+
+        {
+            document.addEventListener('keydown', (e) => {
+                console.log(e.key);
+                if (popupOpen) {
+                    if (e.key == 'ArrowRight') {
+                        $(`#${lastClickedImgCard}`).next().trigger('click');
+                    } else if (e.key == 'ArrowLeft') {
+                        $(`#${lastClickedImgCard}`).prev().trigger('click');
+                    }
+                }
+            });
+        }
         
 
         $('.card.image').on('click', (event) => {
-            app.showPopup(event.currentTarget.children[0].children[0].children[0].innerHTML, event.currentTarget.children[1].src);
+            let title = event.currentTarget.parentNode.parentNode.querySelector('h1').innerHTML;
+            let descr = event.currentTarget.parentNode.parentNode.querySelector('h3').innerHTML;
+            let text = event.currentTarget.children[0].children[0].children[0].innerHTML;
+            let src = event.currentTarget.children[1].src;
+            app.showPopup(`${title} — ${descr}<br>${text}`, src);
+            popupOpen = true;
+            lastClickedImgCard = event.currentTarget.id;
         });
 
         $('.logo').on('click', () => {
             window.location.href="/";
         });
 
-        $('.anchor').on('click', () => {
-            document.querySelector('.logo').style.transform = `rotate(${Math.random()*2-1}deg)`;
-            document.querySelector('.anchor-marker-div').style.transform = `rotate(${Math.random()*720-360}deg)`;
-        });
-
-        $('.cancel.form-submit.btn').on('click', () => {
-            $('.close-popup-btn')[0].click();
-        });
-
         $('.close-popup-btn').on('click', () => {
             $('.popup').removeClass('active');
             $('.landing-page-content').removeClass('blurred');
+            popupOpen = false;
         });
+
         $('.popup-img-underlay').on('click', (event) => {
             event.stopPropagation();
-            $('.popup').removeClass('active');
-            $('.landing-page-content').removeClass('blurred');
+            $('.close-popup-btn').trigger('click');
         });
         
+        $('.popup-scroll-btn.left').on('click', () => {
+            $(`#${lastClickedImgCard}`).prev().trigger('click');
+        });
+
+        $('.popup-scroll-btn.right').on('click', () => {
+            $(`#${lastClickedImgCard}`).next().trigger('click');
+        });
     });
 
     function round(value, decimals = 0) {
