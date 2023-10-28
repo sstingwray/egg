@@ -157,14 +157,11 @@
 
         $('.popup').addClass('active');
         $('.landing-page-content').addClass('blurred');
-
-        paragraph.innerHTML = text;
+        console.log(image);
         image.src = img;
 
-        $(form.querySelector('.confirm.form-submit')).off();
-        $(form.querySelector('.confirm.form-submit')).on('click', () => {
-            $('.close-popup-btn')[0].click();
-        });
+        paragraph.innerHTML = text;
+        paragraph.style.maxWidth = image.width + 'px';
     };
 
     app.showNotificationToast = (text, type = '') => {
@@ -260,7 +257,7 @@
             };
             let text = event.currentTarget.children[0].children[0].children[0].innerHTML;
             let src = event.currentTarget.children[1].src;
-            app.showPopup((title ? title + ' — ': '') + (descr ? descr : '') + (text ? text + '<br>' : ''), src);
+            app.showPopup((title ? title + ' — ': '') + (descr ? descr : '') + (descr && text ? '<br>' : '') +  (text ? text : ''), src);
             popupOpen = true;
             lastClickedImgCard = event.currentTarget.id;
         });
