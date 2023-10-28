@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Einzbern.gg</title>
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/icons/favicon.ico" type="image/x-icon">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="/stylesheets/fontawesome.css">
     <link rel="stylesheet" href="/stylesheets/brands.css">
@@ -11,64 +11,111 @@
     <script src="/javascripts/tinysort.min.js"></script>
     <script src="/javascripts/index.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Crimson Pro" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Crimson Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rubik One" rel="stylesheet"> 
   </head>
   <body>
-    <div class="work-in-progress active flex jc-center align-i-center">
+    <div class="work-in-progress flex jc-center align-i-center">
         Something is brewing here...
     </div>
     <div class="spinner-container flex jc-center align-i-center"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
-    <div class="flex row header bg-alt">
-      <button class="logo" tabindex="1"><span class="kstr">EINZBERN.</span><span class="gg">GG</span></button>
-    </div>
-    <button class="close-btn"><i class="fa fa-long-arrow-left"></i></button>
-    <div class="flex col no-wrap notification-panel"></div>
     <div class="flex align-i-center jc-center popup">
-      <div class="flex col align-i-center mrg-1em form confirm-form card">
-        <p class="confirmation-text"></p>
-        <div class="flex row">
-          <button class="cancel form-submit btn">Cancel</button>
-          <button class="confirm form-submit btn">Submit</button>
-        </div>
+      <div class="img-form flex col align-i-center jc-center">
+        <div class="popup-img-overlay"></div>
+        <img class="popup-img" src="" alt="">
+        <p class="light popup-img-text"></p>
+        <button class="close-popup-btn"><i class="fa fa-times"></i></button>
+        <button class="popup-scroll-btn left"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="popup-scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
+      <div class="popup-img-underlay"></div>
     </div>
-    <div class="gizmo test-gizmo">
-      <h3 class="title">This is a test gizmo</h3>
-      <small>Made to test a few things</small><br>
-      <div class="body">
-        <div class="flex row align-i-center test-gizmo-btn-panel"></div>
-        <div class="flex row test-gizmo-knob-panel switch-panel"></div>
-        <div class="flex row wrap mrg-1em test-gizmo-content-container">
-        </div>
+    <div class="flex row header bg-alt flex col align-i-str">
+      <button class="logo" tabindex="1"><span class="kstr">EINZBERN.</span><span class="gg">GG</span></button>
+      <div class="flex col header-block">
+        <h1 class="color-accent-opaq-heavy">About</h1>
+        <p class="color-accent-opaq-heavy ">Hi! My name is Ekaterina Menabde.<br><br>
+          I am an artist generalist with a focus on pixel art based in Slovakia.<br><br>
+          My specialty is high-resolution pixel illustrations and character portraits, but I am always eager to pick up a new skill and so I have worked all sorts of jobs over the years. 
+        </p>
+      </div>
+      
+      <div class="flex col header-block">
+        <h1 class="color-accent-opaq-heavy">Contacts</h1>
+        <a class="contact-link" href="" target="_blank"><div class="flex row align-i-s-end"><img class="icon" src="/images/icons/icon_mail.png" alt="">einzbern.mail@gmail.com</div></a>
+        <a class="contact-link" href="" target="_blank"><div class="flex row align-i-s-end"><img class="icon" src="/images/icons/icon_twitter.png" alt="">@_einzbern</div></a>
       </div>
     </div>
     <div class="landing-page-content">
-      <div class="flex col align-i-left mrg-1em brd-rad-1em">
-        <h2>Hi! I'm Einzbern and this is my website!</h2>
-      </div>
-      <div class="flex row wrap gizmos-panel bg-alt mrg-1em brd-rad-1em">
-        <div class="flex col align-i-center jc-center mrg-1em">
-          <small>My projects:</small>
+      <div class="flex col mrg-4em">
+        <div id="demonschool">
+          <div class="flex row align-i-center">
+            <h1>Demonschool</h1>
+            <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+          </div>
+          <h3>TBA 2023 / Necrosoft LLC / Steam, PS4, Xbox One, Switch</h3>
+          <p>I was responsible for creating the visual identity of the game from it’s inception as concept artist and UI designer.<br>
+            Later in the project I was making character portraits, sprites and animations, UI assets and animations and 3D environments.</p>
+          <div class="flex row wrap mrg-custom demonschool-container"></div>
         </div>
-      </div>
-      <div class="flex row wrap jc-space-ar links-panel bg-alt mrg-1em brd-rad-1em">
-        <a class="btn" target="_blank" href="https://twitter.com/_einzbern">                  <img class="img-link" src="" alt="Twitter — twitter.com/_einzbern"></a>
-        <a class="btn" target="_blank" href="https://einsbern.tumblr.com/">                   <img class="img-link" src="" alt="Tumblr — einsbern.tumblr.com"></a>
-        <a class="btn" target="_blank" href="https://bsky.app/profile/einzbern.bsky.social/"> <img class="img-link" src="" alt="Bluesky — @einzbern.bsky.social"></a>
+        <div id="xenocrisis">
+          <div class="flex row align-i-center">
+            <h1>Xeno Crisis</h1>
+            <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+          </div>
+          <h3>2019 / Bitmap Bureau / Sega Mega Drive, Dreamcast, PS Vita, N64 and others</h3>
+          <p>Intro and ending cinematics, interstitial illustrations, minor concept and UI work.</p>
+          <div class="flex row wrap mrg-custom xenocrisis-container"></div>
+        </div>
+        <div id="x198">
+          <div class="flex row align-i-center">
+            <h1>198X</h1>
+            <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+          </div>
+          <h3>2019 / Hi-Bit Studios / Steam, PS4, Xbox One, Switch </h3>
+          <p>Character design, cutscene character art, promotional pixel illustation.</p>
+          <div class="flex row wrap mrg-custom x198-container"></div>
+        </div>
+        <div id="idol">
+          <div class="flex row align-i-center">
+            <h1>Idol Manager</h1>
+            <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+          </div>
+          <h3>2021 / Glitch Pitch / Steam, PS5, PS4, Switch, Linux, Mac</h3>
+          <p>Character sprites, environmens.</p>
+          <div class="flex row wrap mrg-custom idol-container"></div>
+        </div>
+        <div id="misc">
+          <div class="flex row align-i-center">
+            <h1>Miscellaneous</h1>
+            <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+          </div>
+          <div class="flex row wrap mrg-custom misc-container"></div>
+        </div>
+        <div id="personal">
+          <div class="flex row align-i-center">
+            <h1>Personal art</h1>
+            <div class="flex w-100 line-div pdng-01em"><svg viewBox="0 0 2 2" preserveAspectRatio="none" class="line-svg"><polyline points="0,1 2,1"></polyline></svg></div>
+          </div>
+          <div class="flex row wrap mrg-custom personal-container"></div>
+        </div>
       </div>
     </div>
     <div class="template">
       <button class="btn template"></button>
-      <div class="gizmo template">
-        <div class="title"><h3 class="title"></h3></div>
-        <div class="body"></div>
-      </div>
       <div class="flex row align-i-center mrg-01em switch-btn template"><p class="label"></p><div class="switch-container"><label class="switch"><input type="checkbox"><div class="slider"></div></label></div></div>
       <div class="separator template"></div>
       <div class="flex bg-alt mrg-1em notification template"><p class="mrg-1em notification-text"></p></div>
+      <div class="card image mrg-1em template">
+        <div class="img-overlay">
+          <div class="img-text">
+            <p class="light pdng-8px"></p>
+          </div>
+        </div>
+        <img class="card-img" src="" alt="">
+      </div>
     </div>
-    <div class="flex row wrap jc-space-ar footer bg-main">
-  
+    <div class="flex row wrap jc-space-ar footer">
     </div>
   </body>
 </html>
