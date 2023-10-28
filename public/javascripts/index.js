@@ -252,9 +252,9 @@
         
 
         $('.card.image').on('click', (event) => {
-            let title = event.currentTarget.parentNode.parentNode.querySelector('h1').innerHTML;
-            let descr = event.currentTarget.parentNode.parentNode.querySelector('h3').innerHTML;
-            let text = event.currentTarget.children[0].children[0].children[0].innerHTML;
+            let title = (event.currentTarget.parentNode.parentNode.querySelector('h1') ? event.currentTarget.parentNode.parentNode.querySelector('h1').innerHTML : "");
+            let descr = (event.currentTarget.parentNode.parentNode.querySelector('h3') ? event.currentTarget.parentNode.parentNode.querySelector('h3').innerHTML : "");
+            let text = (event.currentTarget.children[0].children[0].children[0] ? event.currentTarget.children[0].children[0].children[0].innerHTML : "");
             let src = event.currentTarget.children[1].src;
             app.showPopup(`${title} — ${descr}<br>${text}`, src);
             popupOpen = true;
