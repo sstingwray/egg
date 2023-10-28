@@ -45,7 +45,7 @@
                 misc: [
                     { file:'misc/1.png', text: '' },
                     { file:'misc/2.png', text: '' },
-                    { file:'misc/3.png', text: '' },
+                    { file:'misc/3.png', text: 'Developer portraits for <a target="_blank" href="https://www.bitmapbooks.com/collections/by-game/products/the-king-of-fighters-the-ultimate-history">THE KING OF FIGHTERS: The Ultimate History by Bitmap Books<a/>.' },
                 ],
                 personal: [
                     { file:'personal/1.gif', text: '' },
@@ -126,11 +126,12 @@
         container.appendChild(newSwitch);
     };
 
-    app.fabricateImageCard = (container, img, text, id) => {
+    app.fabricateImageCard = (container, img, text, id, isProject) => {
         let newImageCard = app.components.imageCardTemplate.cloneNode(true);
 
         newImageCard.classList.add('generated');
         newImageCard.classList.remove ('template');
+        (isProject ? newImageCard.classList.add ('project') : null);
         newImageCard.id = id;
         newImageCard.style.transform = `rotate(${Math.random()*2-1}deg)`;
         newImageCard.querySelector('.img-overlay > .img-text > p').innerHTML = text;
@@ -228,7 +229,7 @@
         {
             Object.keys(app.data.images).forEach(key => {
                 app.data.images[key].forEach((image, index)  => {
-                    app.fabricateImageCard(document.querySelector(`.${key}-container`), image.file, image.text, `${key}-${index}`);
+                    app.fabricateImageCard(document.querySelector(`.${key}-container`), image.file, image.text, `${key}-${index}`, (key == 'misc' || key == 'personal' ? false : true));
                 });
             });
         }
@@ -239,7 +240,6 @@
 
         {
             document.addEventListener('keydown', (e) => {
-                console.log(e.key);
                 if (popupOpen) {
                     if (e.key == 'ArrowRight') {
                         $(`#${lastClickedImgCard}`).next().trigger('click');
@@ -252,11 +252,15 @@
         
 
         $('.card.image').on('click', (event) => {
-            let title = event.currentTarget.parentNode.parentNode.querySelector('h1').innerHTML;
-            let descr = event.currentTarget.parentNode.parentNode.querySelector('h3').innerHTML;
+            let title = '';
+            let descr = '';
+            if (event.currentTarget.classList.contains('project')) {
+                title = event.currentTarget.parentNode.parentNode.querySelector('h1').innerHTML;
+                descr = event.currentTarget.parentNode.parentNode.querySelector('h3').innerHTML;
+            };
             let text = event.currentTarget.children[0].children[0].children[0].innerHTML;
             let src = event.currentTarget.children[1].src;
-            app.showPopup(`${title} — ${descr}<br>${text}`, src);
+            app.showPopup((title ? title + ' — ': '') + (descr ? descr : '') + (text ? text + '<br>' : ''), src);
             popupOpen = true;
             lastClickedImgCard = event.currentTarget.id;
         });
