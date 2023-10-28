@@ -698,7 +698,7 @@ span.label {
         width: 4em;
         height: 4em;
         padding: 0.5em;
-        background-color: none;
+        background-color: var(--clear);
         }
         .popup-scroll-btn.right {
           right: -4em;
@@ -712,7 +712,7 @@ span.label {
         font-size: 1em;
         width: 1em;
         height: 1em;
-        background-color: none;
+        background-color: var(--clear);
       }
   }
 
