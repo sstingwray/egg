@@ -2,76 +2,65 @@
     'use strict';
 
     let app = {
+        status: {
+            popupOpen: false,
+            lastClickedImgCard: '',
+            currentFolder: ''
+        },
         parameters: {
             animationDelay: 300
         },
         data: {
-            images: {
-                demonschool: [
-                    { file:'demonschool/1.png', text: '' },
-                    { file:'demonschool/2.png', text: '' },
-                    { file:'demonschool/3.png', text: '' },
-                    { file:'demonschool/4.png', text: '' },
-                    { file:'demonschool/5.png', text: '' },
-                    { file:'demonschool/6.png', text: '' },
-                    { file:'demonschool/7.png', text: '' },
-                    { file:'demonschool/8.png', text: '' },
-                ],
-                xenocrisis: [
-                    { file:'xenocrisis/1.png', text: '' },
-                    { file:'xenocrisis/2.png', text: '' },
-                    { file:'xenocrisis/3.png', text: '' },
-                    { file:'xenocrisis/4.png', text: '' },
-                    { file:'xenocrisis/5.png', text: '' },
-                    { file:'xenocrisis/6.png', text: '' },
-                ],
-                idol: [
-                    { file:'idol-manager/1.png', text: '' },
-                    { file:'idol-manager/2.gif', text: '' },
-                    { file:'idol-manager/3.png', text: '' },
-                    { file:'idol-manager/4.png', text: '' },
-                    { file:'idol-manager/5.gif', text: '' },
-                ],
-                x198: [
-                    { file:'x198/1.gif', text: '' },
-                    { file:'x198/2.gif', text: '' },
-                    { file:'x198/3.gif', text: 'Characters by me, background by another artist.' },
-                    { file:'x198/4.gif', text: 'Characters by me, background by another artist.' },
-                    // { file:'x198/5.png', text: '' },
-                    // { file:'x198/6.png', text: '' },
-                    { file:'x198/7.png', text: '' },
-                    { file:'x198/8.png', text: '' },
-                ],
-                misc: [
-                    { file:'misc/1.png', text: '' },
-                    { file:'misc/2.png', text: '' },
-                    { file:'misc/3.png', text: 'Developer portraits for <a target="_blank" href="https://www.bitmapbooks.com/collections/by-game/products/the-king-of-fighters-the-ultimate-history">THE KING OF FIGHTERS: The Ultimate History by Bitmap Books<a/>.' },
-                ],
-                personal: [
-                    { file:'personal/1.gif', text: '' },
-                    { file:'personal/2.png', text: '' },
-                    { file:'personal/3.png', text: '' },
-                    { file:'personal/4.png', text: '' },
-                    { file:'personal/5.png', text: '' },
-                    { file:'personal/6.png', text: '' },
-                    { file:'personal/7.png', text: '' },
-                    { file:'personal/8.gif', text: '' },
-                    { file:'personal/9.png', text: '' },
-                    { file:'personal/10.png', text: '' },
-                    { file:'personal/11.png', text: '' },
-                    { file:'personal/12.png', text: '' },
-                    { file:'personal/13.png', text: '' },
-                    { file:'personal/14.png', text: '' },
-                    { file:'personal/15.png', text: '' },
-                    { file:'personal/16.jpg', text: '' },
-                    { file:'personal/17.png ', text: '' },
-                    { file:'personal/18.gif', text: '' },
-                ]
-            }
+            images: {},
+            folders: []
         },
         components: {},
         containers: {}
     };
+
+    app.readFiles = () => {
+        let uniqueId = 0;
+
+        fetch(`/getImages`)
+        .then(response => response.json())
+        .then(json => {
+            app.data.images = json.data;
+
+            Object.keys(app.data.images).forEach(key => {
+                app.data.folders.push(key);
+                app.fabricateFolderBtn(app.containers.folderContainer, key);
+                app.data.images[key].forEach((image, index)  => {
+                    app.fabricateImageCard(image.file, image.text, `${uniqueId}`, key);
+                    uniqueId++
+                });
+            });
+
+            const container = document.querySelector('.folder-container');
+
+            [...container.children]
+            .sort((a, b) => a.innerText < b.innerText ? 1 : -1)
+            .forEach(node => container.appendChild(node));
+
+
+            $('.folder').on('click', (event) => {
+                let folders = document.querySelectorAll('.folder');
+                folders.forEach(folder => folder.classList.remove('selected'));
+                event.currentTarget.classList.add('selected');
+                app.status.currentFolder = event.currentTarget.dataset.folder;
+                app.filterImages(app.status.currentFolder);
+            });
+
+            $('.folder.generated').first().trigger('click');
+
+            $('.card.image').on('click', (event) => {
+                let text = event.currentTarget.children[0].children[0].children[0].innerHTML;
+                let src = event.currentTarget.children[1].src;
+                app.showPopup((text ? text : ''), src);
+                app.status.popupOpen = true;
+                app.status.lastClickedImgCard = event.currentTarget.id;
+            });
+        });
+    }
 
     app.fabricateButton = (btnClass, labelText, type, target, toDoFunction, container, hintText = '') => {
         let newBtn = app.components.btnTemplate.cloneNode(true);
@@ -126,19 +115,29 @@
         container.appendChild(newSwitch);
     };
 
-    app.fabricateImageCard = (container, img, text, id, isProject) => {
+    app.fabricateFolderBtn = (container, folder) => {
+        let newFolderBtn = app.components.folderBtnTemplate.cloneNode(true);
+
+        newFolderBtn.classList.add('generated');
+        newFolderBtn.classList.remove ('template');
+        newFolderBtn.innerText = folder;
+        newFolderBtn.dataset.folder = folder;
+
+        container.appendChild(newFolderBtn);
+    };
+
+    app.fabricateImageCard = (img, text, id, folder) => {
         let newImageCard = app.components.imageCardTemplate.cloneNode(true);
 
         newImageCard.classList.add('generated');
         newImageCard.classList.remove ('template');
-        (isProject ? newImageCard.classList.add ('project') : null);
         newImageCard.id = id;
-        newImageCard.style.transform = `rotate(${Math.random()*2-1}deg)`;
+        newImageCard.dataset.folder = folder;
         newImageCard.querySelector('.img-overlay > .img-text > p').innerHTML = text;
         newImageCard.querySelector('.img-overlay').classList.add('no-text');
         newImageCard.querySelector('.card-img').src = `images/full/${img}`;
 
-        container.appendChild(newImageCard);
+        app.containers.imageContainer.appendChild(newImageCard);
     }
 
     app.addSeparator = (container) => {
@@ -157,7 +156,6 @@
 
         $('.popup').addClass('active');
         $('.landing-page-content').addClass('blurred');
-        console.log(image);
         image.src = img;
 
         paragraph.innerHTML = text;
@@ -204,63 +202,54 @@
         app.containers.notificationPanel.prepend(newNotification);
     };
 
-    $(function() {
-        let popupOpen = false;
-        let lastClickedImgCard = '';
+    app.filterImages = (folder) => {
+        let images = document.querySelectorAll('.card.image');
 
+        images.forEach(image => {
+            image.classList.add('hidden');
+            if (image.dataset.folder == app.status.currentFolder) image.classList.remove ('hidden');
+        });
+
+        resizeGridItems();
+    }
+
+    $(function() {
         app.containers.header = document.querySelector('.header');
         app.containers.notificationPanel = document.querySelector('.notification-panel');
-        app.containers.demonschoolContainer = document.querySelector('.demonschool-container');
-        app.containers.xenocrisisContainer = document.querySelector('.xenocrisis-container');
-        app.containers.idolManagerContainer = document.querySelector('.idol-container');
-        app.containers.x198Container = document.querySelector('.x198-container');
-        app.containers.miscContainer = document.querySelector('.misc-container');
-        app.containers.artContrainer = document.querySelector('.art-container');
+        app.containers.imageContainer = document.querySelector('.image-container');
+        app.containers.folderContainer = document.querySelector('.folder-container');
         app.components.spinner = document.querySelector('.spinner-container');
         app.components.btnTemplate = document.querySelector('.btn.template');
         app.components.switchTemplate = document.querySelector('.switch-btn.template');
         app.components.separatorTemplate = document.querySelector('.separator.template');
         app.components.notificationTemplate = document.querySelector('.notification.template');
         app.components.imageCardTemplate = document.querySelector('.card.image.template');
+        app.components.folderBtnTemplate = document.querySelector('.folder.template');
 
-        {
-            Object.keys(app.data.images).forEach(key => {
-                app.data.images[key].forEach((image, index)  => {
-                    app.fabricateImageCard(document.querySelector(`.${key}-container`), image.file, image.text, `${key}-${index}`, (key == 'misc' || key == 'personal' ? false : true));
-                });
-            });
+
+
+        window.onload = () => {
+            app.readFiles();
         }
 
         setTimeout(() => {
+            resizeGridItems();
             $(app.components.spinner).hide();
         }, 1000);
 
         {
             document.addEventListener('keydown', (e) => {
-                if (popupOpen) {
-                    if (e.key == 'ArrowRight') {
-                        $(`#${lastClickedImgCard}`).next().trigger('click');
-                    } else if (e.key == 'ArrowLeft') {
-                        $(`#${lastClickedImgCard}`).prev().trigger('click');
+                if (app.status.popupOpen) {
+                    if (e.key == 'ArrowRight' && $(`#${app.status.lastClickedImgCard}`).next()[0]) {
+                        if (!$(`#${app.status.lastClickedImgCard}`).next()[0].classList.contains('hidden')) $(`#${app.status.lastClickedImgCard}`).next().trigger('click');
+                    } else if (e.key == 'ArrowLeft' && $(`#${app.status.lastClickedImgCard}`).prev()[0]) {
+                        if (!$(`#${app.status.lastClickedImgCard}`).prev()[0].classList.contains('hidden')) $(`#${app.status.lastClickedImgCard}`).prev().trigger('click');
                     }
                 }
             });
         }
-        
 
-        $('.card.image').on('click', (event) => {
-            let title = '';
-            let descr = '';
-            if (event.currentTarget.classList.contains('project')) {
-                title = event.currentTarget.parentNode.parentNode.querySelector('h1').innerHTML;
-                descr = event.currentTarget.parentNode.parentNode.querySelector('h3').innerHTML;
-            };
-            let text = event.currentTarget.children[0].children[0].children[0].innerHTML;
-            let src = event.currentTarget.children[1].src;
-            app.showPopup((title ? title + ' — ': '') + (descr ? descr : '') + (descr && text ? '<br>' : '') +  (text ? text : ''), src);
-            popupOpen = true;
-            lastClickedImgCard = event.currentTarget.id;
-        });
+        window.addEventListener('resize', resizeGridItems);
 
         $('.logo').on('click', () => {
             window.location.href="/";
@@ -269,7 +258,7 @@
         $('.close-popup-btn').on('click', () => {
             $('.popup').removeClass('active');
             $('.landing-page-content').removeClass('blurred');
-            popupOpen = false;
+            app.status.popupOpen = false;
         });
 
         $('.popup-img-underlay').on('click', (event) => {
@@ -278,13 +267,30 @@
         });
         
         $('.popup-scroll-btn.left').on('click', () => {
-            $(`#${lastClickedImgCard}`).prev().trigger('click');
+            if ($(`#${app.status.lastClickedImgCard}`).prev()[0]) {
+                if (!$(`#${app.status.lastClickedImgCard}`).prev()[0].classList.contains('hidden')) $(`#${app.status.lastClickedImgCard}`).prev().trigger('click');
+            }
         });
 
         $('.popup-scroll-btn.right').on('click', () => {
-            $(`#${lastClickedImgCard}`).next().trigger('click');
+            if ($(`#${app.status.lastClickedImgCard}`).next()[0]) {
+                if (!$(`#${app.status.lastClickedImgCard}`).next()[0].classList.contains('hidden')) $(`#${app.status.lastClickedImgCard}`).next().trigger('click');
+            }
         });
     });
+
+    function resizeGridItems() {
+        const items = document.querySelectorAll('.card');
+
+        const rowGap = parseInt(window.getComputedStyle(app.containers.imageContainer).getPropertyValue('gap'));
+
+        items.forEach(item => {
+            // Calculate how many rows the image needs based on its actual height
+            const rowSpan = round((item.getBoundingClientRect().height + rowGap) / (1 + rowGap));
+            item.style.gridRowEnd = `span ${rowSpan}`;
+        });
+    }
+
 
     function round(value, decimals = 0) {
         let returnNum = Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
